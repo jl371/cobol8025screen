@@ -21,8 +21,11 @@
        01 y PIC 9(2) VALUE 1.
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
-           PERFORM DISPLAY-PROCEDURE.
 
+           COMPUTE x = 20.
+           COMPUTE y = 20.
+           PERFORM PLOTPIXEL-PROCEDURE.
+           PERFORM DISPLAY-PROCEDURE.
             STOP RUN.
        DISPLAY-PROCEDURE.
            PERFORM UNTIL i > 25
@@ -35,5 +38,5 @@
                ADD 1 TO i GIVING i
            END-PERFORM.
        PLOTPIXEL-PROCEDURE.
-
+           INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'.
        END PROGRAM YOUR-PROGRAM-NAME.

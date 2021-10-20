@@ -16,15 +16,20 @@
            05 SCRENC OCCURS 25 TIMES.
            10 SCRENCHR PIC A(2).
            10 SCRENR OCCURS 80 TIMES.
-               15 SCRENCHRT PIC X(1) VALUE '-'.
+               15 SCRENCHRT PIC X(1) VALUE ' '.
        01 x PIC 9(2) VALUE 1.
        01 y PIC 9(2) VALUE 1.
+       01 linelength PIC 9(2).
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
 
            COMPUTE x = 20.
            COMPUTE y = 20.
            PERFORM PLOTPIXEL-PROCEDURE.
+           COMPUTE x = 5.
+           COMPUTE y = 5.
+           COMPUTE linelength = 10.
+           PERFORM DRAWVERTICALLINE.
            PERFORM DISPLAY-PROCEDURE.
             STOP RUN.
        DISPLAY-PROCEDURE.
@@ -37,6 +42,16 @@
                COMPUTE j = 1
                ADD 1 TO i GIVING i
            END-PERFORM.
+           COMPUTE i = 1.
        PLOTPIXEL-PROCEDURE.
            INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'.
+       REMOVEPIXEL-PROCEDURE.
+           INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY ' '.
+       DRAWVERTICALLINE.
+           COMPUTE i = x + linelength.
+           PERFORM UNTIL x > i
+               INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'
+               ADD 1 to x GIVING x
+           END-PERFORM
+           COMPUTE i = 1.
        END PROGRAM YOUR-PROGRAM-NAME.

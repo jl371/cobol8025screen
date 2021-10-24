@@ -1,7 +1,7 @@
       ******************************************************************
-      * Author:
-      * Date:
-      * Purpose:
+      * Author: jl371
+      * Date: October 2021
+      * Purpose: Drawing on a canvas of 80 x 25
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
@@ -30,8 +30,14 @@
            COMPUTE linelength = 10.
            PERFORM DRAWVERTICALLINE.
            PERFORM DRAWHORIZONTALLINE.
+           COMPUTE linelength = 5.
+           COMPUTE x = 8.
+           COMPUTE y = 8.
+           PERFORM DRAWDIAGONALLINEB.
+           PERFORM DRAWDIAGONALLINEF.
            PERFORM DISPLAY-PROCEDURE.
-            STOP RUN.
+
+           STOP RUN.
        DISPLAY-PROCEDURE.
            PERFORM UNTIL i > 25
                PERFORM UNTIL j > 80
@@ -73,4 +79,20 @@
            COMPUTE i = 1.
            COMPUTE x = 1.
            COMPUTE y = 1.
+       DRAWDIAGONALLINEB.
+           COMPUTE i = x + linelength - 1.
+           PERFORM UNTIL x > i
+               INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'
+               COMPUTE y = y + 1
+               ADD 1 to x GIVING x
+           END-PERFORM
+           COMPUTE i = 1.
+       DRAWDIAGONALLINEF.
+           COMPUTE i = y + linelength.
+           PERFORM UNTIL y > i
+               INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'
+               COMPUTE x = x - 1
+               ADD 1 to y GIVING y
+           END-PERFORM
+           COMPUTE i = 1.
        END PROGRAM 8025test.

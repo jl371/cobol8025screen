@@ -5,7 +5,7 @@
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. YOUR-PROGRAM-NAME.
+       PROGRAM-ID. 8025test.
        DATA DIVISION.
        FILE SECTION.
        WORKING-STORAGE SECTION.
@@ -22,7 +22,6 @@
        01 linelength PIC 9(2).
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
-
            COMPUTE x = 20.
            COMPUTE y = 20.
            PERFORM PLOTPIXEL-PROCEDURE.
@@ -30,6 +29,7 @@
            COMPUTE y = 5.
            COMPUTE linelength = 10.
            PERFORM DRAWVERTICALLINE.
+           PERFORM DRAWHORIZONTALLINE.
            PERFORM DISPLAY-PROCEDURE.
             STOP RUN.
        DISPLAY-PROCEDURE.
@@ -54,4 +54,23 @@
                ADD 1 to x GIVING x
            END-PERFORM
            COMPUTE i = 1.
-       END PROGRAM YOUR-PROGRAM-NAME.
+       DRAWHORIZONTALLINE.
+           COMPUTE i = y + linelength.
+           PERFORM UNTIL y > i
+               INSPECT SCRENCHRT(x, y) REPLACING CHARACTERS BY '#'
+               ADD 1 to y GIVING y
+           END-PERFORM
+           COMPUTE i = 1.
+       CLEARSCREEN.
+           PERFORM UNTIL i > 25
+               PERFORM UNTIL j > 80
+                   INSPECT SCRENCHRT(i,j) REPLACING CHARACTERS BY '#'
+                   ADD 1 TO j GIVING j
+               END-PERFORM
+               COMPUTE j = 1
+               ADD 1 TO i GIVING i
+           END-PERFORM.
+           COMPUTE i = 1.
+           COMPUTE x = 1.
+           COMPUTE y = 1.
+       END PROGRAM 8025test.
